@@ -52,8 +52,11 @@ public class InputValidator {
             } else if(cur == ',' || cur == ':' || cur == custom.charAt(0)){
                 int  checkIndex = 0;
                 while(checkIndex < customSize){
-                    if(input.charAt(i + checkIndex) != custom.charAt(checkIndex) && i + checkIndex < n){
-                        throw new IllegalArgumentException("구분자 사이에는 숫자만 입력 가능합니다.");
+                    if(i + checkIndex >= n){
+                        throw new IllegalArgumentException("문자열 입력방식이 올바르지 않습니다.");
+                    }
+                    if(input.charAt(i + checkIndex) != custom.charAt(checkIndex)){
+                        throw new IllegalArgumentException("구분자가 올바르지 않습니다..");
                     }
                     checkIndex++;
                 }
