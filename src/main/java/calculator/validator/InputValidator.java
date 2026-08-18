@@ -49,10 +49,10 @@ public class InputValidator {
 
             if(Character.isDigit(cur)){
                 numList.add(Integer.parseInt(String.valueOf(cur)));
-            } else if(cur == ';' || cur == ':' || cur == custom.charAt(0)){
+            } else if(cur == ',' || cur == ':' || cur == custom.charAt(0)){
                 int  checkIndex = 0;
                 while(checkIndex < customSize){
-                    if(input.charAt(i) != custom.charAt(checkIndex)){
+                    if(input.charAt(i + checkIndex) != custom.charAt(checkIndex) && i + checkIndex < n){
                         throw new IllegalArgumentException("구분자 사이에는 숫자만 입력 가능합니다.");
                     }
                     checkIndex++;
@@ -61,6 +61,7 @@ public class InputValidator {
             else{
                 throw new IllegalArgumentException("구분자 사이에는 숫자만 입력 가능합니다.");
             }
+            i += customSize - 1;
         }
         int sum = 0;
         for (Integer num : numList) {
