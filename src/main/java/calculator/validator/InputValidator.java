@@ -44,8 +44,8 @@ public class InputValidator {
 
         List<Integer> numList = new ArrayList<>();
         for (int i = numStartIndex; i < n; i++) {
-
             char cur = input.charAt(i);
+            System.out.println("현재 검사문자: " + cur);
 
             if(Character.isDigit(cur)){
                 numList.add(Integer.parseInt(String.valueOf(cur)));
@@ -57,11 +57,11 @@ public class InputValidator {
                     }
                     checkIndex++;
                 }
+                i += customSize - 1;
             }
             else{
                 throw new IllegalArgumentException("구분자 사이에는 숫자만 입력 가능합니다.");
             }
-            i += customSize - 1;
         }
         int sum = 0;
         for (Integer num : numList) {
