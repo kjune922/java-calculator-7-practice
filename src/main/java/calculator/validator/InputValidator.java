@@ -20,6 +20,9 @@ public class InputValidator {
         if(input.isBlank()){
             throw new IllegalArgumentException("공백만 입력할 수 없습니다.");
         }
+        if(input.length() == 1){
+            return Integer.parseInt(input);
+        }
 
         int n = input.length();
         StringBuilder custom = new StringBuilder();
