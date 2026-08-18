@@ -49,7 +49,7 @@ public class InputValidator {
 
             if(Character.isDigit(cur)){
                 numList.add(Integer.parseInt(String.valueOf(cur)));
-            } else if(!Character.isDigit(cur)){
+            } else if(cur == ';' || cur == ':' || cur == custom.charAt(0)){
                 int  checkIndex = 0;
                 while(checkIndex < customSize){
                     if(input.charAt(i) != custom.charAt(checkIndex)){
