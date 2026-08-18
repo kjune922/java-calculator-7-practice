@@ -14,6 +14,6 @@ public class Calculator {
         String input = inputView.readInput();
 
         Logic logic = new Logic();
-        logic.inputToNum(input);
+        outputView.readCustom(logic.inputToNum(input));
     }
 }

@@ -6,9 +6,7 @@ public class Logic {
 
     public int inputToNum(String input) {
         InputValidator inputValidator = new InputValidator();
-        inputValidator.validateInput(input);
-
-        return 0;
+        return inputValidator.validateInput(input);
     }
 
 }

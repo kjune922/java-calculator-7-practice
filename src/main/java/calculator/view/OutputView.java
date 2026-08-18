@@ -8,6 +8,7 @@ public class OutputView {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
     }
 
-    public void readCustom(String input) {
+    public void readCustom(int result) {
+        System.out.println("결과: " + result);
     }
 }
