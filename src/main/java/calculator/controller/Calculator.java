@@ -1,5 +1,6 @@
 package calculator.controller;
 
+import calculator.domain.Logic;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -12,6 +13,7 @@ public class Calculator {
         InputView inputView = new InputView();
         String input = inputView.readInput();
 
-
+        Logic logic = new Logic();
+        logic.inputToNum(input);
     }
 }
