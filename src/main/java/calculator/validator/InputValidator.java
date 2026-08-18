@@ -56,7 +56,7 @@ public class InputValidator {
                         throw new IllegalArgumentException("문자열 입력방식이 올바르지 않습니다.");
                     }
                     if(input.charAt(i + checkIndex) != custom.charAt(checkIndex)){
-                        throw new IllegalArgumentException("구분자가 올바르지 않습니다..");
+                        throw new IllegalArgumentException("구분자가 올바르지 않습니다.");
                     }
                     checkIndex++;
                 }
