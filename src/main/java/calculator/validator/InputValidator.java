@@ -14,73 +14,95 @@ public class InputValidator {
 
     public int validateInput(String input) {
 
-        if(input.isEmpty()){
+        if (input.isEmpty()) {
             return 0;
         }
-        if(input.isBlank()){
+        if (input.isBlank()) {
             throw new IllegalArgumentException("공백만 입력할 수 없습니다.");
         }
 
-        boolean isJustNum = false;
+        boolean isJustNum = true;
         for (int i = 0; i < input.length(); i++) {
             char cur = input.charAt(i);
-            if(Character.isDigit(cur)){
-                isJustNum = true;
+            if (!Character.isDigit(cur)) {
+                isJustNum = false;
+                break;
             }
         }
-        if(isJustNum){
+        if (isJustNum) {
             return Integer.parseInt(input);
         }
 
         int n = input.length();
-        StringBuilder custom = new StringBuilder();
 
-        int customStartIndex = 2;
-        int customEndIndex = 0;
-        int numStartIndex = 0;
 
-        for (int i = customStartIndex; i < n; i++) {
-            if(input.charAt(i + 1) == 'n'){
-                customEndIndex = i;
-                numStartIndex = i + 2;
-                break;
-            }
-        }
+        if (input.startsWith("//")) {
+            // 커스텀 구분자 + 기본 구분자 처리
 
-        for (int i = customStartIndex; i < customEndIndex; i++) {
-            custom.append(input.charAt(i));
-        }
-        System.out.println("커스텀 구분문자 : " + custom);
-        int customSize = custom.length();
+            StringBuilder custom = new StringBuilder();
 
-        List<Integer> numList = new ArrayList<>();
-        for (int i = numStartIndex; i < n; i++) {
-            char cur = input.charAt(i);
-            System.out.println("현재 검사문자: " + cur);
+            int customStartIndex = 2;
+            int customEndIndex = 0;
+            int numStartIndex = 0;
 
-            if(Character.isDigit(cur)){
-                numList.add(Integer.parseInt(String.valueOf(cur)));
-            } else if(cur == ',' || cur == ':' || cur == custom.charAt(0)){
-                int  checkIndex = 0;
-                while(checkIndex < customSize){
-                    if(i + checkIndex >= n){
-                        throw new IllegalArgumentException("문자열 입력방식이 올바르지 않습니다.");
-                    }
-                    if(input.charAt(i + checkIndex) != custom.charAt(checkIndex)){
-                        throw new IllegalArgumentException("구분자가 올바르지 않습니다.");
-                    }
-                    checkIndex++;
+            for (int i = customStartIndex; i < n; i++) {
+                if (input.charAt(i + 1) == 'n') {
+                    customEndIndex = i;
+                    numStartIndex = i + 2;
+                    break;
                 }
-                i += customSize - 1;
             }
-            else{
-                throw new IllegalArgumentException("구분자 사이에는 숫자만 입력 가능합니다.");
+
+            for (int i = customStartIndex; i < customEndIndex; i++) {
+                custom.append(input.charAt(i));
             }
+            System.out.println("커스텀 구분문자 : " + custom);
+            int customSize = custom.length();
+
+            List<Integer> numList = new ArrayList<>();
+            for (int i = numStartIndex; i < n; i++) {
+                char cur = input.charAt(i);
+                System.out.println("현재 검사문자: " + cur);
+
+                if (Character.isDigit(cur)) {
+                    numList.add(Integer.parseInt(String.valueOf(cur)));
+                } else if (cur == ',' || cur == ':' || cur == custom.charAt(0)) {
+                    int checkIndex = 0;
+                    while (checkIndex < customSize) {
+                        if (i + checkIndex >= n) {
+                            throw new IllegalArgumentException("문자열 입력방식이 올바르지 않습니다.");
+                        }
+                        if (input.charAt(i + checkIndex) != custom.charAt(checkIndex)) {
+                            throw new IllegalArgumentException("구분자가 올바르지 않습니다.");
+                        }
+                        checkIndex++;
+                    }
+                    i += customSize - 1;
+                } else {
+                    throw new IllegalArgumentException("구분자 사이에는 숫자만 입력 가능합니다.");
+                }
+            }
+            int sum = 0;
+            for (Integer num : numList) {
+                sum += num;
+            }
+            return sum;
+        } else {
+            // 기본 구분자 쉼표(,) 콜론(:) 처리
+            List<Integer> numList = new ArrayList<>();
+            int sum = 0;
+            for (int i = 0; i < n; i++) {
+                char cur = input.charAt(i);
+                if (Character.isDigit(cur)) {
+                    numList.add(Integer.parseInt(String.valueOf(cur)));
+                } else if (cur != ',' && cur != ':') {
+                    throw new IllegalArgumentException("구분자가 올바르지 않습니다.");
+                }
+            }
+            for (Integer num : numList) {
+                sum += num;
+            }
+            return sum;
         }
-        int sum = 0;
-        for (Integer num : numList) {
-            sum += num;
-        }
-        return sum;
     }
 }
