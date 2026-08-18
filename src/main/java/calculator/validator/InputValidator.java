@@ -20,7 +20,15 @@ public class InputValidator {
         if(input.isBlank()){
             throw new IllegalArgumentException("공백만 입력할 수 없습니다.");
         }
-        if(input.length() == 1){
+
+        boolean isJustNum = false;
+        for (int i = 0; i < input.length(); i++) {
+            char cur = input.charAt(i);
+            if(Character.isDigit(cur)){
+                isJustNum = true;
+            }
+        }
+        if(isJustNum){
             return Integer.parseInt(input);
         }
 
