@@ -10,6 +10,8 @@ public class Calculator {
         outputView.firstMessage();
 
         InputView inputView = new InputView();
-        inputView.readInput();
+        String input = inputView.readInput();
+
+
     }
 }
