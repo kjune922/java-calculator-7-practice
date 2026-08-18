@@ -1,5 +1,8 @@
 package calculator.validator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class InputValidator {
 
     /**
@@ -11,8 +14,11 @@ public class InputValidator {
 
     public int validateInput(String input) {
 
-        if(input.isBlank()){
+        if(input.isEmpty()){
             return 0;
+        }
+        if(input.isBlank()){
+            throw new IllegalArgumentException("공백만 입력할 수 없습니다.");
         }
 
         int n = input.length();
@@ -20,17 +26,34 @@ public class InputValidator {
 
         int customStartIndex = 2;
         int customEndIndex = 0;
+        int numStartIndex = 0;
 
         for (int i = customStartIndex; i < n; i++) {
-            if(input.charAt(i + 1) == 'n' && input.charAt(i + 2) == '1'){
+            if(input.charAt(i + 1) == 'n'){
                 customEndIndex = i;
+                numStartIndex = i + 1;
+                break;
             }
         }
 
         for (int i = customStartIndex; i < customEndIndex; i++) {
             custom.append(input.charAt(i));
         }
-        System.out.println(custom);
-        return Integer.parseInt(custom.toString());
+        System.out.println("커스텀 구분문자 : " + custom);
+
+        List<Integer> numList = new ArrayList<>();
+        for (int i = numStartIndex; i < n; i++) {
+
+            char cur = input.charAt(i);
+
+            if(Character.isDigit(cur)){
+                numList.add(Integer.parseInt(String.valueOf(cur)));
+            }
+        }
+        int sum = 0;
+        for (Integer num : numList) {
+            sum += num;
+        }
+        return sum;
     }
 }
