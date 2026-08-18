@@ -22,7 +22,7 @@ public class InputValidator {
         int customEndIndex = 0;
 
         for (int i = customStartIndex; i < n; i++) {
-            if(input.charAt(i + 1) == n && input.charAt(i + 2) == '1'){
+            if(input.charAt(i + 1) == 'n' && input.charAt(i + 2) == '1'){
                 customEndIndex = i;
             }
         }
