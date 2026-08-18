@@ -31,7 +31,7 @@ public class InputValidator {
         for (int i = customStartIndex; i < n; i++) {
             if(input.charAt(i + 1) == 'n'){
                 customEndIndex = i;
-                numStartIndex = i + 1;
+                numStartIndex = i + 2;
                 break;
             }
         }
@@ -40,6 +40,7 @@ public class InputValidator {
             custom.append(input.charAt(i));
         }
         System.out.println("커스텀 구분문자 : " + custom);
+        int customSize = custom.length();
 
         List<Integer> numList = new ArrayList<>();
         for (int i = numStartIndex; i < n; i++) {
@@ -48,7 +49,16 @@ public class InputValidator {
 
             if(Character.isDigit(cur)){
                 numList.add(Integer.parseInt(String.valueOf(cur)));
-            } else{
+            } else if(!Character.isDigit(cur)){
+                int  checkIndex = 0;
+                while(checkIndex < customSize){
+                    if(input.charAt(i) != custom.charAt(checkIndex)){
+                        throw new IllegalArgumentException("구분자 사이에는 숫자만 입력 가능합니다.");
+                    }
+                    checkIndex++;
+                }
+            }
+            else{
                 throw new IllegalArgumentException("구분자 사이에는 숫자만 입력 가능합니다.");
             }
         }
