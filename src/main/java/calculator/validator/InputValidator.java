@@ -48,6 +48,8 @@ public class InputValidator {
 
             if(Character.isDigit(cur)){
                 numList.add(Integer.parseInt(String.valueOf(cur)));
+            } else{
+                throw new IllegalArgumentException("구분자 사이에는 숫자만 입력 가능합니다.");
             }
         }
         int sum = 0;
