@@ -90,13 +90,21 @@ public class InputValidator {
         } else {
             // 기본 구분자 쉼표(,) 콜론(:) 처리
             List<Integer> numList = new ArrayList<>();
+            StringBuilder sb = new StringBuilder();
             int sum = 0;
+
             for (int i = 0; i < n; i++) {
                 char cur = input.charAt(i);
                 if (Character.isDigit(cur)) {
-                    numList.add(Integer.parseInt(String.valueOf(cur)));
+                    sb.append(cur);
+                    if(i == n - 1){
+                        numList.add(Integer.parseInt(sb.toString()));
+                    }
                 } else if (cur != ',' && cur != ':') {
                     throw new IllegalArgumentException("구분자가 올바르지 않습니다.");
+                } else{
+                    numList.add(Integer.parseInt(sb.toString()));
+                    sb.setLength(0);
                 }
             }
             for (Integer num : numList) {
