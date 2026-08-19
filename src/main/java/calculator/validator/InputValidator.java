@@ -90,6 +90,9 @@ public class InputValidator {
                         sb.setLength(0);
                     }
                     i += customSize - 1;
+                    if(i + 1 == input.length()){
+                        throw new IllegalArgumentException("마지막 입력은 구분자일 수 없습니다.");
+                    }
                 }
                 else if(cur != ',' && cur != ':'){
                     throw new IllegalArgumentException("구분자가 올바르지 않습니다.");
