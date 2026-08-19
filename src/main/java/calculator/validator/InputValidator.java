@@ -61,13 +61,12 @@ public class InputValidator {
             for (int i = customStartIndex; i < customEndIndex; i++) {
                 custom.append(input.charAt(i));
             }
-//            System.out.println("커스텀 구분문자 : " + custom);
-            int customSize = custom.length();
 
+            int customSize = custom.length();
             List<Integer> numList = new ArrayList<>();
+
             for (int i = numStartIndex; i < n; i++) {
                 char cur = input.charAt(i);
-//                System.out.println("현재 검사문자: " + cur);
 
                 if (Character.isDigit(cur)) {
                     sb.append(cur);
