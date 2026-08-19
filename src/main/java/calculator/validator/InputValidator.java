@@ -94,7 +94,9 @@ public class InputValidator {
             int sum = 0;
 
             for (int i = 0; i < n; i++) {
+
                 char cur = input.charAt(i);
+
                 if (Character.isDigit(cur)) {
                     sb.append(cur);
                     if(i == n - 1){
@@ -106,7 +108,7 @@ public class InputValidator {
                 else if (cur != ',' && cur != ':') {
                     throw new IllegalArgumentException("구분자가 올바르지 않습니다.");
                 }
-                else{
+                else if(!sb.isEmpty()){
                     numList.add(Integer.parseInt(sb.toString()));
                     sb.setLength(0);
                 }
