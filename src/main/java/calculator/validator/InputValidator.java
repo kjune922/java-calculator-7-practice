@@ -71,6 +71,9 @@ public class InputValidator {
                         numList.add(Integer.parseInt(sb.toString()));
                     }
                 }
+                else if(i == n - 1 && !Character.isDigit(cur)){
+                    throw new IllegalArgumentException("마지막 입력은 구분자일 수 없습니다.");
+                }
                 else if (cur == custom.charAt(0)) {
                     int checkIndex = 0;
                     while (checkIndex < customSize) {
