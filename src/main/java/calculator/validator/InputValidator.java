@@ -40,6 +40,7 @@ public class InputValidator {
             // 커스텀 구분자 + 기본 구분자 처리
 
             StringBuilder custom = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
 
             int customStartIndex = 2;
             int customEndIndex = 0;
@@ -65,8 +66,12 @@ public class InputValidator {
                 System.out.println("현재 검사문자: " + cur);
 
                 if (Character.isDigit(cur)) {
-                    numList.add(Integer.parseInt(String.valueOf(cur)));
-                } else if (cur == ',' || cur == ':' || cur == custom.charAt(0)) {
+                    sb.append(cur);
+                    if(i == n - 1){
+                        numList.add(Integer.parseInt(sb.toString()));
+                    }
+                }
+                else if (cur == custom.charAt(0)) {
                     int checkIndex = 0;
                     while (checkIndex < customSize) {
                         if (i + checkIndex >= n) {
@@ -77,8 +82,20 @@ public class InputValidator {
                         }
                         checkIndex++;
                     }
+                    if(!sb.isEmpty()){
+                        numList.add(Integer.parseInt(sb.toString()));
+                        sb.setLength(0);
+                    }
                     i += customSize - 1;
-                } else {
+                }
+                else if(cur != ',' && cur != ':'){
+                    throw new IllegalArgumentException("구분자가 올바르지 않습니다.");
+                }
+                else if(!sb.isEmpty()){
+                    numList.add(Integer.parseInt(sb.toString()));
+                    sb.setLength(0);
+                }
+                else {
                     throw new IllegalArgumentException("구분자 사이에는 숫자만 입력 가능합니다.");
                 }
             }
@@ -87,7 +104,8 @@ public class InputValidator {
                 sum += num;
             }
             return sum;
-        } else {
+        }
+        else {
             // 기본 구분자 쉼표(,) 콜론(:) 처리
             List<Integer> numList = new ArrayList<>();
             StringBuilder sb = new StringBuilder();
@@ -102,7 +120,8 @@ public class InputValidator {
                     if(i == n - 1){
                         numList.add(Integer.parseInt(sb.toString()));
                     }
-                } else if(i == n - 1 && (cur == ',' || cur == ':')){
+                }
+                else if(i == n - 1 && (cur == ',' || cur == ':')){
                     throw new IllegalArgumentException("마지막 입력은 구분자일 수 없습니다.");
                 }
                 else if (cur != ',' && cur != ':') {
