@@ -61,13 +61,13 @@ public class InputValidator {
             for (int i = customStartIndex; i < customEndIndex; i++) {
                 custom.append(input.charAt(i));
             }
-            System.out.println("커스텀 구분문자 : " + custom);
+//            System.out.println("커스텀 구분문자 : " + custom);
             int customSize = custom.length();
 
             List<Integer> numList = new ArrayList<>();
             for (int i = numStartIndex; i < n; i++) {
                 char cur = input.charAt(i);
-                System.out.println("현재 검사문자: " + cur);
+//                System.out.println("현재 검사문자: " + cur);
 
                 if (Character.isDigit(cur)) {
                     sb.append(cur);
@@ -101,12 +101,11 @@ public class InputValidator {
                 else if(cur != ',' && cur != ':'){
                     throw new IllegalArgumentException("구분자가 올바르지 않습니다.");
                 }
-                else if(!sb.isEmpty()){
-                    numList.add(Integer.parseInt(sb.toString()));
-                    sb.setLength(0);
-                }
                 else {
-                    throw new IllegalArgumentException("구분자 사이에는 숫자만 입력 가능합니다.");
+                    if(!sb.isEmpty()) {
+                        numList.add(Integer.parseInt(sb.toString()));
+                        sb.setLength(0);
+                    }
                 }
             }
             int sum = 0;
