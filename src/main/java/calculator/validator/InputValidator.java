@@ -100,9 +100,13 @@ public class InputValidator {
                     if(i == n - 1){
                         numList.add(Integer.parseInt(sb.toString()));
                     }
-                } else if (cur != ',' && cur != ':') {
+                } else if(i == n - 1 && (cur == ',' || cur == ':')){
+                    throw new IllegalArgumentException("마지막 입력은 구분자일 수 없습니다.");
+                }
+                else if (cur != ',' && cur != ':') {
                     throw new IllegalArgumentException("구분자가 올바르지 않습니다.");
-                } else{
+                }
+                else{
                     numList.add(Integer.parseInt(sb.toString()));
                     sb.setLength(0);
                 }
