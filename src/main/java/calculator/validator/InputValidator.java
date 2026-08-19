@@ -48,7 +48,7 @@ public class InputValidator {
             int numStartIndex = 0;
 
             for (int i = customStartIndex; i < n; i++) {
-                if (i + 1 < n && input.charAt(i + 1) == 'n') {
+                if (i + 1 < n && input.charAt(i) == '\\' &&input.charAt(i + 1) == 'n') {
                     customEndIndex = i;
                     numStartIndex = i + 2;
                     break;
