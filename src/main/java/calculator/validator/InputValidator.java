@@ -21,6 +21,7 @@ public class InputValidator {
             throw new IllegalArgumentException("공백만 입력할 수 없습니다.");
         }
 
+
         boolean isJustNum = true;
         for (int i = 0; i < input.length(); i++) {
             char cur = input.charAt(i);
@@ -47,11 +48,14 @@ public class InputValidator {
             int numStartIndex = 0;
 
             for (int i = customStartIndex; i < n; i++) {
-                if (input.charAt(i + 1) == 'n') {
+                if (i + 1 < n && input.charAt(i + 1) == 'n') {
                     customEndIndex = i;
                     numStartIndex = i + 2;
                     break;
                 }
+            }
+            if(customEndIndex <= customStartIndex){
+                throw new IllegalArgumentException("커스텀 구분자 입력 형식이 올바르지 않습니다.");
             }
 
             for (int i = customStartIndex; i < customEndIndex; i++) {
