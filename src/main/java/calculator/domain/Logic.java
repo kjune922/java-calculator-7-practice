@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Logic {
 
-    public int CalculateNumList(List<Integer> numList) {
+    public int calculateNumList(List<Integer> numList) {
         int sum = 0;
         for (Integer i : numList) {
             sum += i;
