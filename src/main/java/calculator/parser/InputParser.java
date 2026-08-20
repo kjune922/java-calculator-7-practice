@@ -1,10 +1,10 @@
-package calculator.view;
+package calculator.parser;
 
 import camp.nextstep.edu.missionutils.Console;
 
-public class InputView {
+public class InputParser {
 
-    public String readInput(){
+    public String parseInput(){
         return Console.readLine();
     }
 }

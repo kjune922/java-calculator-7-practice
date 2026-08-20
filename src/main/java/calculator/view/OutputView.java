@@ -1,7 +1,5 @@
 package calculator.view;
 
-import calculator.validator.InputValidator;
-
 public class OutputView {
 
     public void firstMessage() {
