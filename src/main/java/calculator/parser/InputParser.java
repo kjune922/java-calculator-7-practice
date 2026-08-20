@@ -17,8 +17,7 @@ public class InputParser {
         }
 
         if (isJustNum(input)) {
-            numList.add(Integer.parseInt(input));
-            return numList;
+            return List.of(Integer.parseInt(input));
         }
 
         if (hasCustomDelimiter(input)){
