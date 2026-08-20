@@ -127,3 +127,11 @@ final을 사용해 컨트롤러가 생성된 이후 각 필드가 다른 객체�
 private final InputView inputView = new InputView();
 
 따라서 이 구조는 의존성 주입(DI)이나 의존성 역전 원칙(DIP)을 적용한 것은 아니다. 앞으로 객체 생성 책임을 Application으로 이동하고, CalculatorController는 생성자를 통해 필요한 객체를 전달받는 구조도 고민해볼 수 있다.
+
+### 두번째 리펙토링
+
+InputView가 출력 기능을 사용하지 않는다는 이유로 InputParser로 변경했지만, 
+입력을 읽는 것은 사용자와 프로그램 사이의 입력 경계를 담당하는 View의 책임임을 알게 되었다. 
+또한 Parser는 단순히 문자열을 읽는 객체가 아니라, 
+문자열을 숫자 목록과 같은 의미 있는 데이터로 변환하는 객체라는 점을 이해했다. 따라서 현재 변경은 이름과 실제 책임이 일치하지 않으며, 
+InputView로 되돌린 뒤 추후 InputValidator의 문자열 분석 로직을 별도의 Parser로 분리하는 방향이 더 적절하다고 판단했다.
