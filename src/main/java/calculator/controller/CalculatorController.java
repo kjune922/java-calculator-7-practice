@@ -5,6 +5,8 @@ import calculator.parser.InputParser;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
+import java.util.List;
+
 public class CalculatorController {
 
     private final OutputView outputView = new OutputView();
@@ -15,6 +17,7 @@ public class CalculatorController {
     public void start() {
         outputView.firstMessage();
         String input = inputView.readInput();
-        outputView.readCustom(logic.CalculateNumList(inputParser.parse(input)));
+        List<Integer> numList = inputParser.parse(input);
+        outputView.readCustom(logic.CalculateNumList(numList));
     }
 }
