@@ -5,13 +5,9 @@ import java.util.List;
 
 public class InputParser {
 
-    private int n;
-    private List<Integer> numList;
-
     public List<Integer> parse(String input){
 
-       numList = new ArrayList<>();
-        n = input.length();
+       List<Integer> numList = new ArrayList<>();
 
         if (input.isEmpty()) {
             return numList;
@@ -20,35 +16,35 @@ public class InputParser {
             throw new IllegalArgumentException("공백만 입력할 수 없습니다.");
         }
 
-        boolean isJustNum = true;
-
-        for (int i = 0; i < input.length(); i++) {
-            char cur = input.charAt(i);
-            if (!Character.isDigit(cur)) {
-                isJustNum = false;
-                break;
-            }
-        }
-        if (isJustNum) {
+        if (isJustNum(input)) {
             numList.add(Integer.parseInt(input));
             return numList;
         }
 
-        if (haveCustomDelimiter(input)){
+        if (hasCustomDelimiter(input)){
             return parseCustomDelimiterInput(input);
         }
         return parseDefaultDelimiterInput(input);
 
     }
 
-    private boolean haveCustomDelimiter(String input) {
-        if (input.startsWith("//")) {
-            return true;
+    private boolean isJustNum(String input) {
+        for (int i = 0; i < input.length(); i++) {
+            char cur = input.charAt(i);
+            if (!Character.isDigit(cur)) {
+                return false;
+            }
         }
-        return false;
+        return true;
+    }
+
+    private boolean hasCustomDelimiter(String input) {
+        return input.startsWith("//");
     }
 
     private List<Integer> parseCustomDelimiterInput(String input) {
+        List<Integer> numList = new ArrayList<>();
+        int n = input.length();
 
         StringBuilder custom = new StringBuilder();
         StringBuilder sb = new StringBuilder();
@@ -120,7 +116,8 @@ public class InputParser {
     }
 
     private List<Integer> parseDefaultDelimiterInput(String input) {
-        // 기본 구분자 쉼표(,) 콜론(:) 처리
+        List<Integer> numList = new ArrayList<>();
+        int n = input.length();
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < n; i++) {
