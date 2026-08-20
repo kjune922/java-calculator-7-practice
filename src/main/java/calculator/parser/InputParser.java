@@ -1,16 +1,19 @@
 package calculator.parser;
 
+import calculator.validator.InputValidator;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class InputParser {
+
+    InputValidator inputValidator = new InputValidator();
 
     public List<Integer> parse(String input){
 
         List<Integer> numList = new ArrayList<>();
 
         if (input.isEmpty()) {
-            numList.add(0);
             return numList;
         }
         if (input.isBlank()) {
@@ -103,17 +106,11 @@ public class InputParser {
                     }
                 }
             }
-//            int sum = 0;
-//            for (Integer num : numList) {
-//                sum += num;
-//            }
-//            return sum;
             return numList;
         }
         else {
             // 기본 구분자 쉼표(,) 콜론(:) 처리
             StringBuilder sb = new StringBuilder();
-            int sum = 0;
 
             for (int i = 0; i < n; i++) {
 
@@ -136,10 +133,6 @@ public class InputParser {
                     sb.setLength(0);
                 }
             }
-//            for (Integer num : numList) {
-//                sum += num;
-//            }
-//            return sum;
             return numList;
         }
     }
