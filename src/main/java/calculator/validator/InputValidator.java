@@ -13,7 +13,6 @@ public class InputValidator {
      */
 
     public int validateInput(String input) {
-
         if (input.isEmpty()) {
             return 0;
         }
@@ -21,8 +20,8 @@ public class InputValidator {
             throw new IllegalArgumentException("공백만 입력할 수 없습니다.");
         }
 
-
         boolean isJustNum = true;
+
         for (int i = 0; i < input.length(); i++) {
             char cur = input.charAt(i);
             if (!Character.isDigit(cur)) {
