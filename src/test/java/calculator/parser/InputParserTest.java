@@ -2,6 +2,7 @@ package calculator.parser;
 
 import calculator.domain.Calculator;
 import org.junit.jupiter.api.Test;
+import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 class InputParserTest {
@@ -10,10 +11,9 @@ class InputParserTest {
     private Calculator calculator = new Calculator();
 
     @Test
-    void 빈_문자열은_0을반환() {
-        String input = "";
-        assertThat(calculator.calculateSum(inputParser.parse(input)))
-                .isEqualTo(0);
+    void 빈_문자열은_비어있는_숫자목록을_반환() {
+        List<Integer> numbers = inputParser.parse("");
+        assertThat(numbers).isEmpty();
     }
 
     @Test
@@ -24,10 +24,10 @@ class InputParserTest {
     }
 
     @Test
-    void 기본구분자만으로_계산가능() {
+    void 기본구분자만으로도_숫자를_분리한다() {
         String input = "1,2,:3";
-        assertThat(calculator.calculateSum(inputParser.parse(input)))
-                .isEqualTo(6);
+        List<Integer> numbers = inputParser.parse(input);
+        assertThat(numbers).containsExactly(1,2,3);
     }
 
     @Test
@@ -38,17 +38,31 @@ class InputParserTest {
     }
 
     @Test
-    void 커스텀_구분자가_여러_글자여도_가능() {
+    void 여러_글자의_커스텀_구분자를_사용할수있다() {
+        String input = "//;;\\n1;;2;;3";
+        assertThat(calculator.calculateSum(inputParser.parse(input)))
+                .isEqualTo(6);
+    }
+
+    @Test
+    void 커스텀_구분자가_연속이어도_계산가능() {
         String input = "//;\\n1;;2;;;3";
         assertThat(calculator.calculateSum(inputParser.parse(input)))
                 .isEqualTo(6);
     }
 
     @Test
-    void 잘못된_커스텀_구분자는_예외를_반환() {
+    void 선언한_커스텀_구분자와_다른_문자를_사용하면_예외발생() {
         String input = "//;!\\n1!2;!3";
         assertThatThrownBy(() -> inputParser.parse(input))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 기본_구분자와_커스텀_구분자를_함께_사용가능() {
+        String input = "//;\\n1;2,3:4";
+        assertThat(calculator.calculateSum(inputParser.parse(input)))
+                .isEqualTo(10);
     }
 
     @Test
