@@ -40,7 +40,7 @@ public class InputParser {
     }
 
     private List<Integer> parseCustomDelimiterInput(String input) {
-        List<Integer> numList = new ArrayList<>();
+        List<Integer> numbers = new ArrayList<>();
         int n = input.length();
 
         StringBuilder custom = new StringBuilder();
@@ -73,7 +73,7 @@ public class InputParser {
             if (Character.isDigit(cur)) {
                 sb.append(cur);
                 if(i == n - 1){
-                    numList.add(Integer.parseInt(sb.toString()));
+                    numbers.add(Integer.parseInt(sb.toString()));
                 }
             }
             else if(i == n - 1 && !Character.isDigit(cur)){
@@ -91,7 +91,7 @@ public class InputParser {
                     checkIndex++;
                 }
                 if(!sb.isEmpty()){
-                    numList.add(Integer.parseInt(sb.toString()));
+                    numbers.add(Integer.parseInt(sb.toString()));
                     sb.setLength(0);
                 }
                 i += customSize - 1;
@@ -104,16 +104,16 @@ public class InputParser {
             }
             else {
                 if(!sb.isEmpty()) {
-                    numList.add(Integer.parseInt(sb.toString()));
+                    numbers.add(Integer.parseInt(sb.toString()));
                     sb.setLength(0);
                 }
             }
         }
-        return numList;
+        return numbers;
     }
 
     private List<Integer> parseDefaultDelimiterInput(String input) {
-        List<Integer> numList = new ArrayList<>();
+        List<Integer> numbers = new ArrayList<>();
         int n = input.length();
         StringBuilder sb = new StringBuilder();
 
@@ -124,7 +124,7 @@ public class InputParser {
             if (Character.isDigit(cur)) {
                 sb.append(cur);
                 if(i == n - 1){
-                    numList.add(Integer.parseInt(sb.toString()));
+                    numbers.add(Integer.parseInt(sb.toString()));
                 }
             }
             else if(i == n - 1 && (cur == ',' || cur == ':')){
@@ -134,10 +134,10 @@ public class InputParser {
                 throw new IllegalArgumentException("구분자가 올바르지 않습니다.");
             }
             else if(!sb.isEmpty()){
-                numList.add(Integer.parseInt(sb.toString()));
+                numbers.add(Integer.parseInt(sb.toString()));
                 sb.setLength(0);
             }
         }
-        return numList;
+        return numbers;
     }
 }

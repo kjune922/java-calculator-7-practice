@@ -156,3 +156,15 @@ InputView로 되돌린 뒤 추후 InputValidator의 문자열 분석 로직을 �
 - --> `InputParser`는 무상태 객체로 만드는게 필요함
 
 - 이후 `input`에 숫자만 있는지 확인하는 메소드도 추가해 `parse()`리펙토링
+
+
+### 다섯번째 리펙토링
+
+- 제일 큰 리펙토링 문제로는 `validate`패키지를 유지하느냐, 지우느냐 였다
+- 우선 `parse()`메소드를 보면, 내가 만든 계산기는 `parse()`과정에서 구분자나 숫자
+- 이외의 값이 들어오게되면 애초에 parse작업이 불가능하다.
+- `parse()`과정에서 validate를 다 하다보니 굳이 패키지를 따로 validate를 빼서 하기엔 무리가 있다고 판단해 삭제를 진행하였다.
+- 추가로 각 메소드와 클래스이름이 추상적이었던 `Logic`을 `Calculator`로, 내부 숫자합산 메소드이름도 `calculateSum`으로 바꾸었다.
+![img_2.png](img_2.png)
+
+- 최종 리펙토링 이후 `./gradlew test` 통과

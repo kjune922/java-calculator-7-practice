@@ -4,10 +4,10 @@ import java.util.List;
 
 public class Calculator {
 
-    public int calculateSum(List<Integer> numList) {
+    public int calculateSum(List<Integer> numbers) {
         int sum = 0;
-        for (Integer i : numList) {
-            sum += i;
+        for (Integer number : numbers) {
+            sum += number;
         }
         return sum;
     }
