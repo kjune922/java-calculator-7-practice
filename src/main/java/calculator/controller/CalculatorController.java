@@ -15,7 +15,7 @@ public class CalculatorController {
     private final InputParser inputParser = new InputParser();
 
     public void start() {
-        outputView.firstMessage();
+        outputView.printInputPrompt();
         String input = inputView.readInput();
         List<Integer> numbers = inputParser.parse(input);
         int result = calculator.calculateSum(numbers);
