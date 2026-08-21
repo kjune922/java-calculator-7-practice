@@ -29,7 +29,7 @@ class InputParserTest {
     }
 
     @Test
-    void 기본구분자가_연속이어도_계산가능() {
+    void 기본구분자가_연속이어도_숫자_분리가능() {
         String input = "1,,2";
         List<Integer> numbers = inputParser.parse(input);
         assertThat(numbers).containsExactly(1,2);
@@ -43,7 +43,7 @@ class InputParserTest {
     }
 
     @Test
-    void 커스텀_구분자가_연속이어도_계산가능() {
+    void 커스텀_구분자가_연속이어도_숫자만_분리가능() {
         String input = "//;\\n1;;2;;;3";
         List<Integer> numbers = inputParser.parse(input);
         assertThat(numbers).containsExactly(1,2,3);
