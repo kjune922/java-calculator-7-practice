@@ -18,6 +18,7 @@ public class CalculatorController {
         outputView.firstMessage();
         String input = inputView.readInput();
         List<Integer> numList = inputParser.parse(input);
-        outputView.readCustom(logic.calculateNumList(numList));
+        int result = logic.calculateNumList(numList);
+        outputView.readCustom(result);
     }
 }
