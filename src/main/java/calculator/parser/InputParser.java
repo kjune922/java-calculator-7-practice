@@ -7,10 +7,8 @@ public class InputParser {
 
     public List<Integer> parse(String input){
 
-       List<Integer> numList = new ArrayList<>();
-
         if (input.isEmpty()) {
-            return numList;
+            return List.of();
         }
         if (input.isBlank()) {
             throw new IllegalArgumentException("공백만 입력할 수 없습니다.");
